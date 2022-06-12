@@ -37,12 +37,10 @@ CV <- create_CV_object(
 </div>
 
 ## About Me
-Hello! I'm Nathanael Rolim, a student of International Relations at the Univerity of São Paulo. In some online
+Hello! I'm Nathanael Rolim, a student of International Relations at the University of São Paulo. In some online
 communities, I go by the **ChronoScrat** username. As a student, I have a keen interest in researching public opinion and government, both domestically (in my home country of Brazil), and internationally.
 
-One of my core values is the belief that I can use simple tools that already exisit in order to improve and facilitate people's tasks. Many of such approaches involve creating applications inside Google Sheets.
-
-At work, I manly work with data visualization and analysis.
+One of my core values is the belief that I can use simple tools that already exist in order to improve and facilitate people's tasks. Many of such approaches involve creating applications inside Google Sheets.
 
 
 <div class="cointainer">
