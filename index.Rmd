@@ -9,7 +9,7 @@ output:
 knitr::opts_chunk$set(
   results='asis', 
   echo = FALSE
-)
+)  
 
 library(magrittr) # For the pipe
 source("cv_printing_functions.r")
