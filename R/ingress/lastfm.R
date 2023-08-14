@@ -138,7 +138,7 @@ week_artists <- unique(week_df$artist_mbid) %>% purrr::discard(is.na)
 artists_df <- bigQueryR::bqr_query(projectId = Sys.getenv("BQ_PROJECT"),
                                    datasetId = Sys.getenv("BQ_MUSIC_DATA"),
                                    query = sprintf("SELECT * FROM %s",
-                                                   Sys.getenv("BQ_M_ARTISTS")),
+                                                   Sys.getenv("BQ_M_ARTISTS_D")),
                                    useLegacySql = FALSE)
 
 # Now get all the *new* artists
@@ -152,15 +152,23 @@ new_artists <- setdiff(week_artists, existing_artists)
 
 final_artist_df <- NULL
 
-if(length(new_artists) != 0){
+
+for(i in 1:length(new_artists)){
+  artist_query <- read_json(paste0(
+    "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=",
+    Sys.getenv("LASTFM_KEY"),
+    "&format=json&mbid=",
+    new_artists[i]
+  ))
   
-  for(i in length(new_artists)){
-    artist_query <- read_json(paste0(
-      "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=",
-      Sys.getenv("LASTFM_KEY"),
-      "&format=json&mbid=",
-      new_artists[i]
-    ))
+  # There is a strange problem in LastFM's API in which it will correctly provide
+  # the artist's MBID in the tracks feed, but is not able to find it in the 
+  # `artist.getinfo` method. A solution would be to query MusicBrainz API directly
+  # but I am not in the mood right now.
+  
+  # TODO Switch from LastFM to MusicBrainz API
+  
+  if(length(artist_query) == 1){
     
     artist_query <- artist_query$artist
     artist_query <- within(artist_query, rm(list = c("image",
@@ -179,21 +187,37 @@ if(length(new_artists) != 0){
     } else{
       final_artist_df <- bind_rows(final_artist_df,final_tmp)
     }
+    
+  } else{
+    print("LastFM could not find artist's information even though it provided the artist MBID.")
   }
-  
-  # Now, we upload the new data into the GCP.
-  
-  bigQueryR::bqr_upload_data(projectId = Sys.getenv("BQ_PROJECT"),
-                             datasetId = Sys.getenv("BQ_MUSIC_DATA"),
-                             tableId = Sys.getenv("BQ_M_ARTISTS"),
-                             upload_data = final_artist_df,
-                             create = "CREATE_NEVER",
-                             writeDisposition = "WRITE_APPEND")
-  
-} else{
-  
-  print("No new artists")
 }
 
 
 ################################################################################
+
+week_unique_tracks <- unique(week_df$track_mbid) %>% purrr::discard(is.na)
+
+tracks_df <- bigQueryR::bqr_query(projectId = Sys.getenv("BQ_PROJECT"),
+                                   datasetId = Sys.getenv("BQ_MUSIC_DATA"),
+                                   query = sprintf("SELECT * FROM %s",
+                                                   Sys.getenv("BQ_M_TRACKS_D")),
+                                   useLegacySql = FALSE)
+
+existing_tracks <- unique(tracks_df$tracks_mbid)
+
+new_tracks <- setdiff(week_unique_tracks, existing_tracks)
+
+final_tracks_df <- NULL
+
+if(length(new_tracks) != 0){
+  
+  for(i in 1:length(new_tracks)){
+    
+    
+    
+  }
+  
+} else{
+  print("Amanzingly, no new tracks")
+}
