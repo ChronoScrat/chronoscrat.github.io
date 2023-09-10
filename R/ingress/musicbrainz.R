@@ -1,5 +1,5 @@
 #' This file queries MusicBrainz's API for information regarding tracks, artists
-#' and albums gotten from LastFM's weekly feed. We do this because, for some
+#' and albums provided by LastFM's weekly feed. We do this because, for some
 #' reason, LastFM is able to correctly provide an MBID in the tracks feed, but
 #' when we query this MBID through other endpoints, it fails to return the info.
 
@@ -55,11 +55,25 @@ if(length(new_tracks) != 0){
   
   for(i in 1:length(new_tracks)){
     
-    track_query <- read_json(paste0(
-      "https://musicbrainz.org/ws/2/recording/",
-      new_tracks[i],
-      "?fmt=json&inc=artists+tags"
-    ))
+    # For some reason, not all tracks with an MBID actually have a MusicBrainz's
+    # recording page or associated data. This means that even with the MBID, some
+    # records will not have any metadata registred in the Tracks db.
+    
+    # TODO (urgently) Allow this code to fail gracefully. If the query returns an
+    # error, simply skip to the next track.
+    
+    tryCatch({
+      
+      track_query <- read_json(paste0(
+        "https://musicbrainz.org/ws/2/recording/",
+        new_tracks[i],
+        "?fmt=json&inc=artists+tags"
+      ))
+      
+    }, error = function(e){
+      print("Track not found. Skipping.")
+      next
+    })
     
     # Normally, we should consider the problem of a track having more than two
     # artists. However, due to a problem with scrobbling Youtube Music, tracks

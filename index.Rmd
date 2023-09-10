@@ -31,7 +31,6 @@ CV <- create_CV_object(
 <li>`r fontawesome::fa("github")` [ChronoScrat](https://github.com/ChronoScrat/)</li>
 <li>`r fontawesome::fa("linkedin")` [NathanaelRolim](https://linkedin.com/in/nathanaelrolim)</li>
 <li>`r fontawesome::fa("twitter")` <a href="https://twitter.com/nathanaelrolim" target="_blank">@NathanaelRolim</a></li>
-<li>`r fontawesome::fa("globe")` [PudimDEV](https://pudim.dev) </li>
 </ul>
 
 </div>
