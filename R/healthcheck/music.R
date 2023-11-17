@@ -5,30 +5,24 @@ library(lubridate)
 library(DBI)
 library(tidyr)
 
-if(Sys.getenv("LASTFM_KEY") == ""){
-  dotenv::load_dot_env()
-}
 
 if(Sys.getenv("CI") != "true"){
+  dotenv::load_dot_env()
   bq_auth(path = "./auth.json")
 } else{
-  
   system('echo "$BIGQUERY_CREDS_64" | base64 --decode > auth-cred.json')
-  
   bq_auth(path = "./auth-cred.json")
-  
 }
 
-#week_end <- today()
-week_end <- ymd("2023-09-24")
+week_end <- today()
 week_start <- as_datetime(week_end - days(7))
 week_start_utc <- as.numeric(week_start)
 
 conn <- dbConnect(
   bigquery(),
-  project = "nath-personal",
+  project = Sys.getenv("BQ_PROJECT"),
   dataset = "music_history",
-  billing = "nath-personal"
+  billing = Sys.getenv("BQ_PROJECT")
 )
 
 

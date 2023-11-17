@@ -11,31 +11,36 @@
 library(dplyr)
 library(lubridate)
 library(jsonlite)
+library(bigrquery)
+library(DBI)
 
 # Load environment
 ## If the code is executed headless, the keys will be provided by the environment,
 ## else, they will be load into R via a .env file and the credentials JSON.
 
-if(Sys.getenv("LASTFM_KEY") == ""){
-  dotenv::load_dot_env()
-}
-
 if(Sys.getenv("CI") != "true"){
-  bigQueryR::bqr_auth("auth.json")
+  dotenv::load_dot_env()
+  bq_auth(path = "./auth.json")
 } else{
-  
   system('echo "$BIGQUERY_CREDS_64" | base64 --decode > auth-cred.json')
-  
-  bigQueryR::bqr_auth("auth-cred.json")
-  
+  bq_auth(path = "./auth-cred.json")
 }
-
 
 # Set the time frame
 
 week_end <- today()
 week_start <- as_datetime(week_end - days(7))
 week_start_utc <- as.numeric(week_start)
+
+
+# Establish connection with BigQuery
+
+conn <- dbConnect(
+  bigquery(),
+  project = Sys.getenv("BQ_PROJECT"),
+  dataset = "music_history",
+  billing = Sys.getenv("BQ_PROJECT")
+)
 
 
 # Send initial request to LastFM's server. This will fetch the 200 most recent
@@ -117,11 +122,6 @@ week_df <- week_df %>%
 
 #Upload the data into the GCP
 
-bigQueryR::bqr_upload_data(projectId = Sys.getenv("BQ_PROJECT"),
-                           datasetId = Sys.getenv("music_history"),
-                           tableId = Sys.getenv("tracks_feed"),
-                           upload_data = week_df,
-                           create = "CREATE_NEVER",
-                           writeDisposition = "WRITE_APPEND")
+dbAppendTable(conn,"tracks_feed",tracks_df)
 
 print("Finished importing tracks")
