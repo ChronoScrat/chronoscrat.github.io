@@ -25,7 +25,8 @@ jobs:
         run: |
           options(repos = c(CRAN = 'https://packagemanager.posit.co/cran/__linux__/jammy/latest'), download.file.method = 'libcurl')
           options(HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])))
-          install.packages(c("tidyverse","lubridate","glue","rmarkdown","dotenv","bigQueryR","jsonlite"))
+          install.packages("renv")
+          renv::restore()
         shell: Rscript {0}
       - name: Ingest LastFM
         run: Rscript R/ingress/lastfm.R
