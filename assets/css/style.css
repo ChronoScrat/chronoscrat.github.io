@@ -1,46 +1,6 @@
 body{
-    max-width: 940px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-bottom: 150px;
+    font-family: 'Iosevka Term Web', monospace;
+    background-color: #222;
+    color: #fff;
+    height: 100%;
 }
-
-.info-box{
-    display: block;
-    margin-top: 100px;
-}
-
-.info-box img{
-    display: block;
-    border-radius: 25%;
-    margin: auto;
-}
-
-.info-box h1{
-    font-size: 20pt;
-    text-align: center;
-}
-
-.info-box .pron{
-    font-size: 12pt;
-    text-align: center;
-}
-
-.info-box ul{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    width: 100%;
-    padding: 0;
-    flex-wrap: wrap;
-}
-
-.info-box ul li{
-    margin-left: 1rem;
-}
-
-.info-box ul li:first-child{
-    margin-left: 0;
-}
-
