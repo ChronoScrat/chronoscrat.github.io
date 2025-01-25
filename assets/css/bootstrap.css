@@ -1,6 +1,8 @@
 .container {
   margin-right: auto;
   margin-left: auto;
+  margin-top:.5rem;
+  margin-bottom: 1.5rem;
 }
 @media (min-width: 768px) {
   .container {

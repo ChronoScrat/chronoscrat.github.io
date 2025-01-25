@@ -4,3 +4,19 @@ body{
     color: #fff;
     height: 100%;
 }
+
+.blinking{
+    color: #fff;
+    background-color: #fff;
+    animation: blink 1.25s steps(5, start) infinite;
+}
+
+@keyframes blink{
+    to {
+        visibility: hidden;
+    }
+}
+
+.menu-nav li{
+    display: inline;
+}
