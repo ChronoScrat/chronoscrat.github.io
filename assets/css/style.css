@@ -1,8 +1,61 @@
+/*** Main components ***/
+
 body{
     font-family: 'Iosevka Term Web', monospace;
     background-color: #222;
     color: #fff;
     height: 100%;
+}
+
+
+a, a:visited{
+    color: #cba6f7;
+    text-decoration: underline;
+}
+
+a:hover, a:focus{
+    color: #fff;
+    background-color: #8839ef;
+}
+
+/*** Navigation ***/
+
+.menu-nav{
+    padding: 0;
+    text-align: center;
+}
+.menu-nav li{
+    display: inline;
+}
+
+/*** Terminal ***/
+
+.prompt{
+    display: block;
+    margin-bottom: 1.5rem;
+    margin-top: .25rem
+}
+
+.pwd{
+    color: #89B4FA;
+}
+
+.command{
+    font-weight: 800;
+    color: #F5C2E7;
+}
+
+img#avatar{
+    border-radius: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img#cat{
+    width: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .blinking{
@@ -15,8 +68,4 @@ body{
     to {
         visibility: hidden;
     }
-}
-
-.menu-nav li{
-    display: inline;
 }
