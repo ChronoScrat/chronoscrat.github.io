@@ -1,5 +1,34 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://chronoscrat.github.io'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = "Nathan's Nook"
 theme = 're-terminal'
+
+[params]
+    themeColor = 'blue'
+    showLastUpdated = true
+    updatedDatePrefix = "Updated"
+    readingTime = true
+    Toc = true
+    showMenuItems = 5
+
+[params.logo]
+    logoText = "Nathan's Nook"
+
+[menu]
+[[menu.main]]
+    name = 'Home'
+    url = '/'
+    weight = 10
+[[menu.main]]
+    name = 'About'
+    url = '/about'
+    weight = 20
+[[menu.main]]
+    name = 'Posts'
+    url = '/posts/'
+    weight = 30
+[[menu.main]]
+    name = 'Reviews'
+    url = '/reviews/'
+    weight = 40
 
