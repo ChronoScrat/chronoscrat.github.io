@@ -1,4 +1,5 @@
 # Parameters
+set unstable := true
 podman := which("podman") || require("podman-remote")
 mode := env("MODE", "development")
 hugo_image := "cgr.dev/chainguard/hugo"
@@ -10,6 +11,11 @@ hugo := podman + ' run -it --rm \
     --name chronoscrat.io \
     -v $(pwd):' + hugo_dir + ':Z \
     -p 8080:8080 \' + hugo_image
+
+# Config
+[group("config")]
+fetch-submodules:
+    git submodule update --init --recursive 
 
 # Serve
 [group("serve")]
