@@ -10,6 +10,7 @@ theme = 're-terminal'
     readingTime = true
     Toc = true
     showMenuItems = 5
+    oneHeadingSize = false
 
 [params.logo]
     logoText = "Nathan's Nook"
@@ -31,4 +32,8 @@ theme = 're-terminal'
     name = 'Reviews'
     url = '/reviews/'
     weight = 40
+[[menu.main]]
+    name = 'Resume'
+    url = 'https://chronoscrat.github.io/resume'
+    weight = 50
 
