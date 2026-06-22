@@ -1,5 +1,9 @@
 +++
 title = 'Hi there!'
+
+[extra]
+framed = true
+
 +++ 
 
 # Hello there 👋

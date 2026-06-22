@@ -1,9 +1,9 @@
 +++
-date = '2025-10-26T21:14:58Z'
+date = 2025-10-26T21:14:58Z
+updated = 2026-10-20
 author = 'Nathanael Rolim'
-draft = true
 title = 'My New Awesome Post'
-showFullContent = false
+description = 'Testetsteste'
 tags = ['one','two']
 +++
 
@@ -45,7 +45,7 @@ echo "Hello World!"
 | Alternated | Thing | In CSS |
 
 
-```
+```bash
 nathanael @ saidar in 🖿 chronoscrat.github.io on  hugo-site [ !1 ?2 ≡ ] 
 ❯ code .
 ```

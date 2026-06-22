@@ -1,0 +1,52 @@
+title = "Nathan's Nook"
+base_url = "https://chronoscrat.github.io"
+
+author = "Nathanael Rolim"
+
+compile_sass = true
+build_search_index = true
+
+theme = "terminus"
+
+ignored_static = []
+ignored_content = []
+
+generate_feeds = true
+
+taxonomies = [
+    {name = "tags", feed = true},
+    {name = "tags"},
+    {name = "categories", paginate_by = 5},
+    {name = "authors"},
+]
+
+[markdown]
+
+render_emoji = true
+lazy_async_image = true
+
+[markdown.highlighting]
+style = "inline"
+theme = "catppuccin-mocha"
+extra_themes = ["themes/terminus/syntaxes/monokai-classic.json"]
+
+[extra]
+close_responsive_menu_on_resize = true
+favicon_emoji = "👨‍💻"
+feed_icon = true
+layout = "center"
+show_default_author = true
+color_scheme = "catppuccin-mocha"
+
+main_menu = [
+    { name = "Home", url = "/" },
+    { name = "Blog", url = "blog", trailing_slash = true },
+    { name = "Tags", url = "tags", trailing_slash = true },
+    { name = "Resume", url = "https://chronoscrat.github.io/resume" },
+]
+
+socials = [
+    { name = "email", url = "mailto:nathanael.rolim@proton.me" },
+    { name = "github", url = "https://github.com/chronoscrat" },
+    { name = "linkedin", url = "https://www.linkedin.com/in/nathanaelrolim" },
+]
